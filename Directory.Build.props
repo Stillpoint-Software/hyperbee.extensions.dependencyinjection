@@ -17,7 +17,7 @@
 
 	<!-- SourceLink -->
 
-	<PropertyGroup Condition="'$(PublishPackage)'=='true'" >
+	<PropertyGroup  >
 		<!-- Enable deterministic build for nuget package -->
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 
@@ -26,7 +26,7 @@
 		<DebugType>embedded</DebugType>
 	</PropertyGroup>
 
-	<ItemGroup Condition="'$(PublishPackage)'=='true'">
+	<ItemGroup >
 		<PackageReference Include="Microsoft.SourceLink.Bitbucket.Git" Version="1.1.1">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
