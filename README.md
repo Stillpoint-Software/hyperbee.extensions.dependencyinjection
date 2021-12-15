@@ -1,0 +1,1 @@
+Hyperbee.Extensions.DependencyInjection
