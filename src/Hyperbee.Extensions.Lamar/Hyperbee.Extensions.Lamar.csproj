@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Lamar" Version="7.0.0" />
+		<PackageReference Include="Lamar.Microsoft.DependencyInjection" Version="7.0.0" />
+	</ItemGroup>
+</Project>
