@@ -19,7 +19,7 @@ function Publish-Packages() {
 	}
 }
 
-function Clean-Packages() {
+function Remove-Packages() {
     Param(
         [string] $Name = 'hyperbee.',
         [int] $Keep = 10,
