@@ -12,7 +12,8 @@ function Publish-Packages() {
 
 	try {
 		Write-Host "Building and publishing packages"
-		msbuild -v:m -p:PublishPackage=true
+        $timestamp = [System.DateTime]::UtcNow.ToString( "yyMMddHHmmss" )
+        msbuild -v:m -t:pack -p:PushAfterPack=true -p:VersionSuffix="local$timestamp"
 	}
 	catch {
 		Write-Error "Publish-Packages failed. Make sure you are executing from a `Developer PowerShell` session."
