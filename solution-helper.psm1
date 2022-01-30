@@ -29,8 +29,7 @@ function Publish-Packages() {
             throw
         }
 
-        <# msbuild -v:m -t:pack -p:PushAfterPack=true -p:VersionSuffix="$Tag$timestamp" #>
-        dotnet pack --no-build --configuration $Configuration --version-suffix "$Tag$timestamp" -p:PushAfterPack=true -p:PackageSource='https://www.myget.org/F/lpoint/auth/01429c3b-aacd-4dba-8fba-74cc294ed537/api/v3/index.json'
+        dotnet pack --no-build --configuration $Configuration --version-suffix "$Tag$timestamp" -p:PushAfterPack=true
 	}
 	catch {
 		Write-Error "Publish-Packages failed. Make sure you are executing from a `Developer PowerShell` session."
