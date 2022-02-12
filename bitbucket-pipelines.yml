@@ -18,7 +18,7 @@ pipelines:
               #
               - export SOLUTION_NAME=Hyperbee.Extensions.DependencyInjection
               - export CONFIGURATION=Debug
-              - dotnet restore ${SOLUTION_NAME}.sln --source ${NUGET_SOURCE_LPOINT}
+              - dotnet restore ${SOLUTION_NAME}.sln --source ${NUGET_SOURCE_LPOINT} --source https://www.nuget.org/api/v2/
               - dotnet build --no-restore ${SOLUTION_NAME}.sln --configuration ${CONFIGURATION}
               # Run Unit Tests
               #
@@ -40,7 +40,7 @@ pipelines:
               #
               - export SOLUTION_NAME=Hyperbee.Extensions.DependencyInjection
               - export CONFIGURATION=Debug
-              - dotnet restore ${SOLUTION_NAME}.sln --source ${NUGET_SOURCE_LPOINT}
+              - dotnet restore ${SOLUTION_NAME}.sln --source ${NUGET_SOURCE_LPOINT} --source https://www.nuget.org/api/v2/
               - dotnet build --no-restore ${SOLUTION_NAME}.sln --configuration ${CONFIGURATION}
               # Run Unit Tests
               #
