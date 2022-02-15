@@ -1,8 +1,4 @@
-#  Template publish .NET Core package to nuget.org
-
-#  This template allows you to publish your .NET Core package to nuget.org.
-#  The workflow allows running tests, code linting and security scans on feature branches (as well as master).
-#  The .NET Core package will be validated and published after the code is merged to master.
+#  Build and publish .NET Core package
 
 image: mcr.microsoft.com/dotnet/sdk:6.0
 
@@ -15,6 +11,12 @@ pipelines:
           caches:
               - dotnetcore
           script:
+              # Find the solution file
+              #
+              - SOLUTION_FILES=$(find *.sln)
+              - if [ ${#SOLUTION_FILES[@]} -ne 1 ]; then echo "INDETERMINATE TARGET SOLUTION." ; exit 1 ; else SOLUTION_NAME=${SOLUTION_FILES[0]%.sln} ; fi
+              - echo "SOLUTION_NAME is $SOLUTION_NAME"
+
               # Select Configuration
               #
               - if [ $BITBUCKET_BRANCH == 'master' ]; then BUILD_CONFIGURATION='Release' ; else BUILD_CONFIGURATION='Debug' ; fi
@@ -23,7 +25,6 @@ pipelines:
 
               # Build Solution
               #
-              - export SOLUTION_NAME=Hyperbee.Extensions.DependencyInjection
               - dotnet restore ${SOLUTION_NAME}.sln --source ${NUGET_SOURCE_LPOINT} --source https://www.nuget.org/api/v2/
               - dotnet build --no-restore ${SOLUTION_NAME}.sln --configuration ${BUILD_CONFIGURATION}
               # Run Unit Tests
@@ -36,6 +37,7 @@ pipelines:
               # Convert trx result format to junit
               - export PATH="$PATH:/root/.dotnet/tools"
               - trx2junit ./TestResults/*.trx
+
     build-test-publish:
       - step:
           name: Publish Packages
@@ -43,6 +45,12 @@ pipelines:
           caches:
               - dotnetcore
           script:
+              # Find the solution file
+              #
+              - SOLUTION_FILES=$(find *.sln)
+              - if [ ${#SOLUTION_FILES[@]} -ne 1 ]; then echo "INDETERMINATE TARGET SOLUTION." ; exit 1 ; else SOLUTION_NAME=${SOLUTION_FILES[0]%.sln} ; fi
+              - echo "SOLUTION_NAME is $SOLUTION_NAME"
+
               # Select Configuration
               #
               - if [ $BITBUCKET_BRANCH == 'master' ]; then BUILD_CONFIGURATION='Release' ; else BUILD_CONFIGURATION='Debug' ; fi
@@ -52,7 +60,6 @@ pipelines:
 
               # Build Solution
               #
-              - export SOLUTION_NAME=Hyperbee.Extensions.DependencyInjection
               - dotnet restore ${SOLUTION_NAME}.sln --source ${NUGET_SOURCE_LPOINT} --source https://www.nuget.org/api/v2/
               - dotnet build --no-restore ${SOLUTION_NAME}.sln --configuration ${BUILD_CONFIGURATION}
               # Run Unit Tests
@@ -61,7 +68,6 @@ pipelines:
               - dotnet tool install -g trx2junit
               - dotnet test --no-build --configuration ${BUILD_CONFIGURATION} --logger:trx --results-directory:./TestResults
               # Pack and Publish
-              # Auto publishes projects with PublishAfterPack property
               #
               - dotnet pack --no-build --configuration ${BUILD_CONFIGURATION} --output ./output --version-suffix "${VERSION_SUFFIX}" -p:PackageSource='${NUGET_SOURCE_LPOINT}' -p:PushAfterPack=true
           after-script:
