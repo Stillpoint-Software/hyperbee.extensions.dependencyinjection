@@ -11,14 +11,20 @@ pipelines:
     build-test:
       - step:
           name: Build and Unit Test
+          deployment: Staging
           caches:
               - dotnetcore
           script:
+              - echo "BITBUCKET_BRANCH is `$BITBUCKET_BRANCH`"
+              - BUILD_CONFIGURATION=Debug
+              - if [ $BITBUCKET_BRANCH -e 'master' ]; then BUILD_CONFIGURATION='Release' ; fi
+              - echo "BUILD_CONFIGURATION is `BUILD_CONFIGURATION`"
+
               # Build Solution
               #
               - export SOLUTION_NAME=Hyperbee.Extensions.DependencyInjection
               - export CONFIGURATION=Debug
-              - dotnet restore ${SOLUTION_NAME}.sln --source ${NUGET_SOURCE_LPOINT}
+              - dotnet restore ${SOLUTION_NAME}.sln --source ${NUGET_SOURCE_LPOINT} --source https://www.nuget.org/api/v2/
               - dotnet build --no-restore ${SOLUTION_NAME}.sln --configuration ${CONFIGURATION}
               # Run Unit Tests
               #
@@ -33,6 +39,7 @@ pipelines:
     build-test-publish:
       - step:
           name: Publish Packages
+          deployment: Staging
           caches:
               - dotnetcore
           script:
@@ -40,7 +47,7 @@ pipelines:
               #
               - export SOLUTION_NAME=Hyperbee.Extensions.DependencyInjection
               - export CONFIGURATION=Debug
-              - dotnet restore ${SOLUTION_NAME}.sln --source ${NUGET_SOURCE_LPOINT}
+              - dotnet restore ${SOLUTION_NAME}.sln --source ${NUGET_SOURCE_LPOINT} --source https://www.nuget.org/api/v2/
               - dotnet build --no-restore ${SOLUTION_NAME}.sln --configuration ${CONFIGURATION}
               # Run Unit Tests
               #
@@ -50,8 +57,8 @@ pipelines:
               # Pack and Publish
               # Auto publishes projects with PublishAfterPack property
               #
-              - export VERSION_SUFFIX="develop"$(date +%y%m%d%H%M%S)
-              - dotnet pack --no-build --configuration ${CONFIGURATION} --version-suffix ${VERSION_SUFFIX} -p:PackageSource='${NUGET_SOURCE_LPOINT}' -p:PushAfterPack=true
+              - export VERSION_SUFFIX="develop."$(date +%y%m%d%H%M%S)
+              - dotnet pack --no-build --configuration ${CONFIGURATION} --output ./output --version-suffix ${VERSION_SUFFIX} -p:PackageSource='${NUGET_SOURCE_LPOINT}' -p:PushAfterPack=true
           after-script:
               # Unit Test Post-Processing
               # Convert trx result format to junit

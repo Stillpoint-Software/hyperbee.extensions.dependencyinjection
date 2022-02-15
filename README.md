@@ -1,20 +1,15 @@
 
 # Hyperbee Core
 
-This solution containes foundational libraries for Hyperbee projects.
-
-DO NOT PLACE BUSINESS LOGIC IN THESE LIBRARIES OR YOU WILL BE FIRED!
+This solution containes libraries for dependency injection.
 
 
 ## Projects
 
-| Project           | Description
-|:------------------|:------------------------------
-| Hyperbee.Core     | System classes 
-| Hyperbee.Cloud    | Cloud services
-| Hyperbee.Code     | Roslyn code and rules
-| Hyperbee.Json     | JsonPath
-| Hyperbee.Pipeline | Pipelines and Command patterns
+| Project                                 | Description
+|:----------------------------------------|:------------------------------
+| Hyperbee.Extensions.DependencyInjection | General purpose service registration helpers
+| Hyperbee.Extensions.Lamar               | Lamar service registration helpers
 
 ## Publish Nuget Package
 
@@ -25,7 +20,8 @@ Publish your nugets
 
 ```powershell
 # From Developer PowerShell
-msbuild -v:m -p:PublishPackage=true
+$timestamp = [System.DateTime]::UtcNow.ToString( 'yyMMddHHmmss' )
+dotnet pack --no-build --configuration $Configuration --output ./output --version-suffix "local$timestamp" -p:PushAfterPack=true
 ```
  
 For convenience, the msbuild command is exposed in the solution powershell helper. See section below.
@@ -37,7 +33,7 @@ The solution includes a powershell helper. This helper includes:
 | Command          | Description
 | ---------------- | ----------------------------------------
 | Publish-Packages | Publish packages to the default feed
-| Remove-Packages  | Remove stale packages from the default feed
+| Resize-Feed      | Feed package retention maintenance
 
 ```powershell
 # From Developer PowerShell
