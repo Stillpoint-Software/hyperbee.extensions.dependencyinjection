@@ -30,7 +30,7 @@ pipelines:
               #
               - REPORTS_PATH=./test-reports/build_${BITBUCKET_BUILD_NUMBER}
               - dotnet tool install -g trx2junit
-              - dotnet test --no-build --logger:trx --results-directory:./TestResults
+              - dotnet test --no-build --configuration ${BUILD_CONFIGURATION} --logger:trx --results-directory:./TestResults
           after-script:
               # Unit Test Post-Processing
               # Convert trx result format to junit
@@ -53,14 +53,13 @@ pipelines:
               # Build Solution
               #
               - export SOLUTION_NAME=Hyperbee.Extensions.DependencyInjection
-              - export CONFIGURATION=Debug
               - dotnet restore ${SOLUTION_NAME}.sln --source ${NUGET_SOURCE_LPOINT} --source https://www.nuget.org/api/v2/
               - dotnet build --no-restore ${SOLUTION_NAME}.sln --configuration ${BUILD_CONFIGURATION}
               # Run Unit Tests
               #
               - REPORTS_PATH=./test-reports/build_${BITBUCKET_BUILD_NUMBER}
               - dotnet tool install -g trx2junit
-              - dotnet test --no-build --logger:trx --results-directory:./TestResults
+              - dotnet test --no-build --configuration ${BUILD_CONFIGURATION} --logger:trx --results-directory:./TestResults
               # Pack and Publish
               # Auto publishes projects with PublishAfterPack property
               #
