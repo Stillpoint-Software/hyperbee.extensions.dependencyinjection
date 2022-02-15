@@ -46,7 +46,7 @@ pipelines:
               # Select Configuration
               #
               - if [ $BITBUCKET_BRANCH == 'master' ]; then BUILD_CONFIGURATION='Release' ; else BUILD_CONFIGURATION='Debug' ; fi
-              - if [ $BITBUCKET_BRANCH == 'master' ]; then VERSION_SIFFIX='' ; else VERSION_SUFFIX="develop."$(date +%y%m%d%H%M%S) ; fi
+              - if [ $BITBUCKET_BRANCH == 'master' ]; then VERSION_SUFFIX='' ; else VERSION_SUFFIX="develop."$(date +%y%m%d%H%M%S) ; fi
               - echo "BITBUCKET_BRANCH is $BITBUCKET_BRANCH"
               - echo "BUILD_CONFIGURATION is $BUILD_CONFIGURATION"
 
