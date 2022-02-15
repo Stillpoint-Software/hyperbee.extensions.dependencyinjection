@@ -17,8 +17,8 @@ pipelines:
           script:
               - echo "BITBUCKET_BRANCH is $BITBUCKET_BRANCH"
               - BUILD_CONFIGURATION=Debug
-              - if [ $BITBUCKET_BRANCH -e 'master' ]; then BUILD_CONFIGURATION='Release' ; fi
-              - echo "BUILD_CONFIGURATION is $BUILD_CONFIGURATION""
+              - if [ $BITBUCKET_BRANCH == 'master' ]; then BUILD_CONFIGURATION='Release' ; fi
+              - echo "BUILD_CONFIGURATION is $BUILD_CONFIGURATION"
 
               # Build Solution
               #
