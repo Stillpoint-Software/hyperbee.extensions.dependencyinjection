@@ -19,6 +19,9 @@ definitions:
           - echo "BITBUCKET_BRANCH is $BITBUCKET_BRANCH"
           - echo "BUILD_CONFIGURATION is $BUILD_CONFIGURATION"
 
+          # Powershell
+          - pwsh -File ./version.ps1
+
           # Build Solution
           - dotnet restore ${SOLUTION_NAME}.sln --source ${NUGET_SOURCE_LPOINT} --source https://www.nuget.org/api/v2/
           - dotnet build --no-restore ${SOLUTION_NAME}.sln --configuration ${BUILD_CONFIGURATION}
