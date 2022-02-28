@@ -10,7 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.targets = Directory.Build.targets
 		README.md = README.md
 		solution-helper.psm1 = solution-helper.psm1
-		version.ps1 = version.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Tests", "Solution Tests", "{F9B24CD9-E06B-4834-84CB-8C29E5F10BE0}"
