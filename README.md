@@ -31,9 +31,10 @@ For convenience, the msbuild command is exposed in the solution powershell helpe
 The solution includes a powershell helper. This helper includes:
 
 | Command          | Description
-| ---------------- | ----------------------------------------
+| ---------------- | -----------------------------------------
 | Publish-Packages | Publish packages to the default feed
 | Resize-Feed      | Feed package retention maintenance
+| Update-Version   | Increment build Major,Minor,Patch Version
 
 ```powershell
 # From Developer PowerShell
