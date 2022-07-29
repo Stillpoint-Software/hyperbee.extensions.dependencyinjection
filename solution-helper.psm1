@@ -53,7 +53,13 @@ function Resize-Feed() {
 
         # get all versions for this package
 
-        $versions = Find-Package $packageName -source $source -allversions | Sort-Object
+        $sortExpr = { param($version) # convert '1.2.3-..' to '00001-00002-00003-..' 
+            $parts = $version.Split('-')
+            $key = ( $parts[0].Split('.') | ForEach-Object { $_.PadLeft(5,'0') } ) -join '-'
+            $key,$parts[1] -join '-'
+        }
+
+        $versions = Find-Package $packageName -source $source -allversions | Sort-Object { &$sortExpr -version $_.Version } -Descending
 
         Write-Host "Found '$packageName'. $($versions.Count) Packages."
         
@@ -116,7 +122,6 @@ function Update-Version() {
 		Write-Error "Update-Version failed. Make sure you are executing from a `Developer PowerShell`."
 	}
 }
-
 
 Export-ModuleMember -Function 'Publish-Packages'
 Export-ModuleMember -Function 'Resize-Feed'
