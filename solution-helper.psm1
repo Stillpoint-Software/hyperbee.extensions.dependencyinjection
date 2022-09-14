@@ -53,7 +53,13 @@ function Resize-Feed() {
 
         # get all versions for this package
 
-        $versions = Find-Package $packageName -source $source -allversions | Sort-Object
+        $sortExpr = { param($version) # convert '1.2.3-..' to '00001-00002-00003-..' 
+            $parts = $version.Split('-')
+            $key = ( $parts[0].Split('.') | ForEach-Object { $_.PadLeft(5,'0') } ) -join '-'
+            $key,$parts[1] -join '-'
+        }
+
+        $versions = Find-Package $packageName -source $source -allversions | Sort-Object { &$sortExpr -version $_.Version } -Descending
 
         Write-Host "Found '$packageName'. $($versions.Count) Packages."
         
@@ -73,7 +79,8 @@ function Update-Version() {
         [Parameter(Position = 0,Mandatory=$true)]
         [ValidateSet('Major','Minor','Patch', IgnoreCase = $true)]
         [string] $Type,
-        [string] $Path = 'Directory.Build.Props'
+        [string] $Path = 'Directory.Build.props',
+        [switch] $Commit
     )
 
     try {
@@ -93,9 +100,23 @@ function Update-Version() {
         $version = $node.$propName -as [Int]
         $node.$propName = ($version + 1) -as [String]
 
-        Write-Host "$propName is now '$($node.$PropName)'."
+        if ( $Type -eq 'major' ) {
+            $node.MinorVersion = '0'
+            $node.PatchVersion = '0'
+        }
+
+        if ( $Type -eq 'minor' ) {
+            $node.PatchVersion = '0'
+        }
+
+        Write-Host "Version now '$($node.MajorVersion).$($node.MinorVersion).$($node.PatchVersion)'."
 
         $xml.Save($Path)
+
+        if ( $Commit ) {
+            git add $path
+            git commit -m "bump $($Type.ToLower())" -q -o $Path
+        }
     }
     catch {
 		Write-Error "Update-Version failed. Make sure you are executing from a `Developer PowerShell`."
