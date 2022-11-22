@@ -20,6 +20,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperbee.Extensions.Depende
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperbee.Extensions.Lamar", "src\Hyperbee.Extensions.Lamar\Hyperbee.Extensions.Lamar.csproj", "{539948F2-1ECB-4812-80ED-91AB4067EFBD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{D2D6FAA2-99F4-4A54-AA6B-93F3C99C4EB0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{57EA4F25-417D-4BCB-B9C8-6C77FB0DBA6A}"
+	ProjectSection(SolutionItems) = preProject
+		deployment.yml = deployment.yml
+		build-test.yml = build-test.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +52,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FE7689BE-D1A2-4992-AD96-0CCBF38E52FD} = {F9B24CD9-E06B-4834-84CB-8C29E5F10BE0}
+		{D2D6FAA2-99F4-4A54-AA6B-93F3C99C4EB0} = {870D9301-BE3D-44EA-BF9C-FCC2E87FE4CD}
+		{57EA4F25-417D-4BCB-B9C8-6C77FB0DBA6A} = {D2D6FAA2-99F4-4A54-AA6B-93F3C99C4EB0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {32874F5B-B467-4F28-A8E2-82C2536FB228}
