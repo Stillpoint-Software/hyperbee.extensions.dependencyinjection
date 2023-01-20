@@ -1,4 +1,4 @@
-﻿using BaselineTypeDiscovery;
+﻿using JasperFx.TypeDiscovery;
 using Lamar;
 using Lamar.Scanning.Conventions;
 using Microsoft.Extensions.Configuration;

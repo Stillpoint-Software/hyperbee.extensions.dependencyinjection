@@ -1,7 +1,7 @@
-﻿using System;
+﻿using JasperFx.Core.Reflection;
 using Lamar;
-using LamarCodeGeneration.Util;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace Hyperbee.Extensions.Lamar;
 
@@ -9,16 +9,16 @@ internal static class RegistryHelper
 {
     internal static bool IsStartupRegistry( Type type )
     {
-        if ( Equals( type.Assembly, typeof(IStartupRegistry).Assembly ) )
+        if ( Equals( type.Assembly, typeof( IStartupRegistry ).Assembly ) )
             return false;
 
-        return typeof(IStartupRegistry).IsAssignableFrom( type ) && 
+        return typeof( IStartupRegistry ).IsAssignableFrom( type ) &&
                !type.IsInterface && !type.IsAbstract && !type.IsGenericType;
     }
 
     internal static void IncludeStartupRegistry( ServiceRegistry registry, Type type, IConfiguration configuration )
     {
-        if ( type.GetConstructor( new[] { typeof(IConfiguration) } ) == null )
+        if ( type.GetConstructor( new[] { typeof( IConfiguration ) } ) == null )
             return;
 
         var startup = Activator.CreateInstance( type, configuration ).As<IStartupRegistry>();
