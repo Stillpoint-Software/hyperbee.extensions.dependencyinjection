@@ -2,7 +2,7 @@
   <!-- Solution version numbers -->
   <!-- Solution wide versioning -->
   <PropertyGroup>
-    <MajorVersion>1</MajorVersion>
+    <MajorVersion>2</MajorVersion>
     <MinorVersion>1</MinorVersion>
     <PatchVersion>5</PatchVersion>
   </PropertyGroup>
