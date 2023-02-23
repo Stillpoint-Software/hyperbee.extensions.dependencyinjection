@@ -57,4 +57,4 @@ jobs:
         dotnet test --no-build --configuration ${{env.BUILD_CONFIGURATION}} --logger:trx --results-directory:./TestResults
   
     - name: Pack and Publish
-      run: dotnet pack --no-build --configuration ${{ env.BUILD_CONFIGURATION}} --output ./output --version-suffix "${{env.VERSION_SUFFIX}}" -p:PackageSource='${{ env.LPOINT}}' -p:PushAfterPack=true
+      run: dotnet pack --no-build --configuration ${{ env.BUILD_CONFIGURATION}} -p:PackageOutputPath=../../output --version-suffix "${{env.VERSION_SUFFIX}}" -p:PackageSource='${{ env.LPOINT}}' -p:PushAfterPack=true

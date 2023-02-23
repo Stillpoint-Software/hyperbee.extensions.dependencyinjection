@@ -59,7 +59,7 @@ definitions:
           - dotnet test --no-build --configuration ${BUILD_CONFIGURATION} --logger:trx --results-directory:./TestResults
               
           # Pack and Publish
-          - dotnet pack --no-build --configuration ${BUILD_CONFIGURATION} --output ./output --version-suffix "${VERSION_SUFFIX}" -p:PackageSource='${NUGET_SOURCE_LPOINT}' -p:PushAfterPack=true
+          - dotnet pack --no-build --configuration ${BUILD_CONFIGURATION} -p:PackageOutputPath=../../output --version-suffix "${VERSION_SUFFIX}" -p:PackageSource='${NUGET_SOURCE_LPOINT}' -p:PushAfterPack=true
 
         after-script:
           # Unit Test Post-Processing
