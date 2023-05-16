@@ -1,4 +1,4 @@
-﻿using JasperFx.TypeDiscovery;
+﻿using JasperFx.Core.TypeScanning;
 using Lamar;
 using Lamar.Scanning.Conventions;
 using Microsoft.Extensions.Configuration;
