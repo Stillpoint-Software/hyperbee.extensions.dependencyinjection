@@ -4,7 +4,7 @@
   <PropertyGroup>
     <MajorVersion>2</MajorVersion>
     <MinorVersion>1</MinorVersion>
-    <PatchVersion>12</PatchVersion>
+    <PatchVersion>13</PatchVersion>
   </PropertyGroup>
   <!-- Disable automatic package publishing -->
   <PropertyGroup>
