@@ -21,7 +21,7 @@ internal static class RegistryHelper
         if ( type.GetConstructor( new[] { typeof( IConfiguration ) } ) == null )
             return;
 
-        var startup = Activator.CreateInstance( type, configuration ).As<IStartupRegistry>();
+        var startup = Activator.CreateInstance( type, configuration )!.As<IStartupRegistry>();
 
         var childRegistry = new ServiceRegistry();
         startup.ConfigureContainer( childRegistry );
