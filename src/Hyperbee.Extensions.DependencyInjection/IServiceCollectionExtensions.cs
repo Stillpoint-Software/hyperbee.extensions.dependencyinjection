@@ -10,11 +10,9 @@ public static class IServiceCollectionExtensions
 {
     public static void RegisterTypesThatClose( this IServiceCollection services, Type openType, ServiceLifetime lifetime, Assembly assembly = null )
     {
-        if ( services == null )
-            throw new ArgumentNullException( nameof(services) );
+        ArgumentNullException.ThrowIfNull( services );
 
-        if ( openType == null )
-            throw new ArgumentNullException( nameof(openType) );
+        ArgumentNullException.ThrowIfNull( openType );
 
         if ( !openType.IsGenericTypeDefinition || !openType.ContainsGenericParameters ) // must be an open generic
             throw new ArgumentException( "Type must be an open generic.", nameof(openType) );

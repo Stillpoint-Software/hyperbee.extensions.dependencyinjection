@@ -5,9 +5,16 @@ name: Build Test and Publish
 
 on:
   workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Publish `master` branch nugets'
+        type: boolean
+        required: true
+        default: false
+        
 env: 
    BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
-   LPOINT: ${{ secrets.NUGET_SOURCE_LPOINT}}
+   LPOINT: ${{ secrets.NUGET_SOURCE_LPOINT }}
 
 jobs:
    build-test-publish:
@@ -15,13 +22,13 @@ jobs:
     
     steps:
     - name: Release Configuration
-      if: ${{env.BRANCH_NAME =='master' }}
+      if: ${{ env.BRANCH_NAME =='master' }}
       run: |
           echo "BUILD_CONFIGURATION=Release" >> $GITHUB_ENV
           echo "VERSION_SUFFIX=" >> $GITHUB_ENV 
     
     - name: Debug Configuration
-      if: ${{ env.BRANCH_NAME == 'develop'}}
+      if: ${{ env.BRANCH_NAME == 'develop' }}
       run: |
           echo "BUILD_CONFIGURATION=Debug" >> $GITHUB_ENV
           echo "VERSION_SUFFIX=develop.$(date +'%y%m%d%H%M%S')" >> $GITHUB_ENV
@@ -33,6 +40,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 8.0.x
+
     - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages
@@ -40,21 +48,24 @@ jobs:
         key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
         restore-keys: |
           ${{ runner.os }}-nuget
+
     - name: Restore dependencies
-      run: dotnet restore  --source ${{ env.LPOINT}} --source https://www.nuget.org/api/v2/
+      run: dotnet restore --source ${{ env.LPOINT }} --source https://www.nuget.org/api/v2/
     
     - name: Build Solution
-      run: dotnet build --no-restore --configuration ${{env.BUILD_CONFIGURATION}}
+      run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }}
   
-    - name: Install Unit Test tool
+    - name: Run Tests
       run: |
-        echo 'REPORTS_PATH=./test-reports/build_${{github.run_number}}' >> $GITHUB_ENV
-        dotnet tool install -g trx2junit
-        
-    - name: Run Unit Tests
-      run: |
-        echo 'export PATH="$PATH:/root/.dotnet/tools"' >> "$GITHUB_ENV"
-        dotnet test --no-build --configuration ${{env.BUILD_CONFIGURATION}} --logger:trx --results-directory:./TestResults
-  
+        dotnet test --no-build --configuration ${{ env.BUILD_CONFIGURATION }} --logger:trx --results-directory:./TestResults
+ 
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
+      with:
+        files: ./TestResults/**/*.trx
+    
     - name: Pack and Publish
-      run: dotnet pack --no-build --configuration ${{ env.BUILD_CONFIGURATION}} -p:PackageOutputPath=../../output --version-suffix "${{env.VERSION_SUFFIX}}" -p:PackageSource='${{ env.LPOINT}}' -p:PushAfterPack=true
+      if: ${{ github.event.inputs.publish == 'true' && env.BRANCH_NAME =='master' }}
+      run: dotnet pack --no-build --configuration ${{ env.BUILD_CONFIGURATION }} -p:PackageOutputPath=../../output --version-suffix "${{ env.VERSION_SUFFIX }}" -p:PackageSource='${{ env.LPOINT }}' -p:PushAfterPack=true
+
