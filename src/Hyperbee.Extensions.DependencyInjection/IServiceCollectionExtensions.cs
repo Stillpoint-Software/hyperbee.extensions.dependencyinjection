@@ -15,7 +15,7 @@ public static class IServiceCollectionExtensions
         ArgumentNullException.ThrowIfNull( openType );
 
         if ( !openType.IsGenericTypeDefinition || !openType.ContainsGenericParameters ) // must be an open generic
-            throw new ArgumentException( "Type must be an open generic.", nameof(openType) );
+            throw new ArgumentException( "Type must be an open generic.", nameof( openType ) );
 
         // scan
         assembly ??= Assembly.GetCallingAssembly();
