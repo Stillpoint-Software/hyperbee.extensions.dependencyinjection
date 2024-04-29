@@ -59,4 +59,5 @@ if ( Test-Path ./solution-helper.psm1 ) {
 
 * Save and restart Visual Studio
 
+![hyperbee](https://github.com/Stillpoint-Software/hyperbee.extensions.dependencyinjection/assets/117473104/1d38d3b5-88cb-495a-94e2-0a153f811873)
 
