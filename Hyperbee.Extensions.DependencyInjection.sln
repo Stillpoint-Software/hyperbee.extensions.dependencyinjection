@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
 		Directory.Build.targets = Directory.Build.targets
+		LICENSE = LICENSE
 		README.md = README.md
 		solution-helper.psm1 = solution-helper.psm1
 	EndProjectSection
@@ -20,10 +21,27 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperbee.Extensions.Lamar", "src\Hyperbee.Extensions.Lamar\Hyperbee.Extensions.Lamar.csproj", "{539948F2-1ECB-4812-80ED-91AB4067EFBD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{D2D6FAA2-99F4-4A54-AA6B-93F3C99C4EB0}"
+	ProjectSection(SolutionItems) = preProject
+		..\hyperbee.templating\.github\dependabot.yml = ..\hyperbee.templating\.github\dependabot.yml
+		..\hyperbee.templating\.github\issue-branch.yml = ..\hyperbee.templating\.github\issue-branch.yml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{57EA4F25-417D-4BCB-B9C8-6C77FB0DBA6A}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\build-test-publish.yml = .github\workflows\build-test-publish.yml
+		..\hyperbee.templating\.github\workflows\create-prerelease.yml = ..\hyperbee.templating\.github\workflows\create-prerelease.yml
+		..\hyperbee.templating\.github\workflows\create-release.yml = ..\hyperbee.templating\.github\workflows\create-release.yml
+		..\hyperbee.templating\.github\workflows\format.yml = ..\hyperbee.templating\.github\workflows\format.yml
+		..\hyperbee.templating\.github\workflows\issue-branch.yml = ..\hyperbee.templating\.github\workflows\issue-branch.yml
+		..\hyperbee.templating\.github\workflows\publish.yml = ..\hyperbee.templating\.github\workflows\publish.yml
+		..\hyperbee.templating\.github\workflows\test-report.yml = ..\hyperbee.templating\.github\workflows\test-report.yml
+		..\hyperbee.templating\.github\workflows\test.yml = ..\hyperbee.templating\.github\workflows\test.yml
+		..\hyperbee.templating\.github\workflows\unlist-nuget.yml = ..\hyperbee.templating\.github\workflows\unlist-nuget.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{54838BBA-0DEF-45EB-9351-C0071981B107}"
+	ProjectSection(SolutionItems) = preProject
+		todo.md = todo.md
 	EndProjectSection
 EndProject
 Global
@@ -52,6 +70,7 @@ Global
 		{FE7689BE-D1A2-4992-AD96-0CCBF38E52FD} = {F9B24CD9-E06B-4834-84CB-8C29E5F10BE0}
 		{D2D6FAA2-99F4-4A54-AA6B-93F3C99C4EB0} = {870D9301-BE3D-44EA-BF9C-FCC2E87FE4CD}
 		{57EA4F25-417D-4BCB-B9C8-6C77FB0DBA6A} = {D2D6FAA2-99F4-4A54-AA6B-93F3C99C4EB0}
+		{54838BBA-0DEF-45EB-9351-C0071981B107} = {870D9301-BE3D-44EA-BF9C-FCC2E87FE4CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {32874F5B-B467-4F28-A8E2-82C2536FB228}
