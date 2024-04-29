@@ -59,7 +59,6 @@ if ( Test-Path ./solution-helper.psm1 ) {
 
 * Save and restart Visual Studio
 
-
 # Status
 
 | Branch     | Action                                                                                                                                                                                                                      |
