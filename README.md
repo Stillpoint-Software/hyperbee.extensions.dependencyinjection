@@ -1,5 +1,5 @@
 
-# Hyperbee Core
+# Hyperbee Extensions Dependency Injection
 
 This solution containes libraries for dependency injection.
 
@@ -60,4 +60,19 @@ if ( Test-Path ./solution-helper.psm1 ) {
 * Save and restart Visual Studio
 
 ![hyperbee](https://github.com/Stillpoint-Software/hyperbee.extensions.dependencyinjection/assets/117473104/1d38d3b5-88cb-495a-94e2-0a153f811873)
+
+# Status
+
+| Branch     | Action                                                                                                                                                                                                                      |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `develop`  | [![Build status](https://github.com/Stillpoint-Software/Hyperbee.Extensions.DependencyInjection/actions/workflows/publish.yml/badge.svg?branch=develop)](https://github.com/Stillpoint-Software/Hyperbee.Extensions.DependencyInjection/actions/workflows/publish.yml)  |
+| `main`     | [![Build status](https://github.com/Stillpoint-Software/Hyperbee.Extensions.DependencyInjection/actions/workflows/publish.yml/badge.svg)](https://github.com/Stillpoint-Software/Hyperbee.Extensions.DependencyInjection/actions/workflows/publish.yml)                 |
+
+
+[![Hyperbee.Extensions.DependencyInjection](https://github.com/Stillpoint-Software/Hyperbee.Extensions.DependencyInjection/blob/main/assets/hyperbee.svg?raw=true)](https://github.com/Stillpoint-Software/Hyperbee.Extensions.DependencyInjection)
+
+# Help
+ See [Todo](https://github.com/Stillpoint-Software/Hyperbee.Extensions.DependencyInjection/blob/main/docs/todo.md)
+
+
 

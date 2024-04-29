@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hyperbee.Extensions.DependencyInjection.Tests;
@@ -7,7 +7,7 @@ namespace Hyperbee.Extensions.DependencyInjection.Tests;
 public class DependencyInjectionTests
 {
 
- [TestMethod]
+    [TestMethod]
     public void Should_be_true()
     {
         Assert.IsTrue( 1 + 1 == 2 );

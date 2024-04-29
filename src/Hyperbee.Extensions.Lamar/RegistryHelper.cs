@@ -1,7 +1,7 @@
-﻿using JasperFx.Core.Reflection;
+﻿using System;
+using JasperFx.Core.Reflection;
 using Lamar;
 using Microsoft.Extensions.Configuration;
-using System;
 
 namespace Hyperbee.Extensions.Lamar;
 
