@@ -4,8 +4,8 @@
     <IsPackable>true</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Lamar" Version="13.0.0" />
-    <PackageReference Include="Lamar.Microsoft.DependencyInjection" Version="13.0.0" />
+    <PackageReference Include="Lamar" Version="13.0.3" />
+    <PackageReference Include="Lamar.Microsoft.DependencyInjection" Version="13.0.3" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="Microsoft.SourceLink.GitHub" Version="8.0.0">
