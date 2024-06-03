@@ -5,7 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Lamar" Version="13.0.4" />
-    <PackageReference Include="Lamar.Microsoft.DependencyInjection" Version="13.0.3" />
+    <PackageReference Include="Lamar.Microsoft.DependencyInjection" Version="13.0.4" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="Microsoft.SourceLink.GitHub" Version="8.0.0">
